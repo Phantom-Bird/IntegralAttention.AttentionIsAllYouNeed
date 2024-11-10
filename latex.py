@@ -1,12 +1,4 @@
-import matplotlib.pyplot as plt
-import webbrowser
-
-
-def show(latex_code):
-    plt.text(0.5, 0.5, latex_code)
-    plt.axis('off')
-    plt.show()
-
+MATHJAX = 'mathjax-full/es5/tex-mml-chtml.js'
 
 def get_html(latex_code):
     return r'''
@@ -25,7 +17,7 @@ def get_html(latex_code):
                     "HTML-CSS": { fonts: ["TeX"] }
                 });
             </script>
-            <script type="text/javascript" src="http://mathjax.josephjctang.com/MathJax.js?config=TeX-MML-AM_HTMLorMML">
+            <script type="text/javascript" src="%s">
             </script>
         </head>
         <body>
@@ -34,5 +26,5 @@ def get_html(latex_code):
             </div>
         </body>
         </html>
-    ''' % latex_code
+    ''' % (MATHJAX, latex_code)
 

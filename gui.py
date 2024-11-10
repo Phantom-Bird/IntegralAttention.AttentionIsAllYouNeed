@@ -16,7 +16,7 @@ def generate_html():
             fp.write(get_html(pi_get_latex_ans(p, q)))
 
         # 打开 webview 窗口显示生成的 HTML 文件
-        webview.create_window('计算结果', 'res.html')
+        webview.create_window('计算结果', 'res.html', width=800, height=200)
         webview.start()
     except ValueError:
         messagebox.showerror("输入错误", "请输入有效的整数！")

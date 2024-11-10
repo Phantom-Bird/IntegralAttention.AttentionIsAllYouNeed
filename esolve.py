@@ -14,11 +14,10 @@ def I(n: int) -> Expr:
     return x ** n * (1 - x) ** n * (a + b * x + c * x ** 2) / (1 + x ** 2)
 
 
-PiIntegrateResult = namedtuple(
-    'PiIntegrateResult',
+EIntegrateResult = namedtuple(
+    'EIntegrateResult',
     {
-        'pi_term': Expr,
-        'log2_term': Expr,
+        'e_term': Expr,
         'constant_term': Expr,
     }
 )
@@ -47,7 +46,7 @@ def get_one_abc(n: int, p: int, q: int):
     return linsolve((pi_term - q, log2_term, constant_term + p), a, b, c)
 
 
-def solve_pi(p: int, q: int) -> tuple[int, int, int, int, int] | None:
+def solve_e(p: int, q: int) -> tuple[int, int, int, int, int] | None:
     """pi =?= p/q"""
     for i in range(1, MAX_TRY+1):
         for a, b, c in get_one_abc(i, p, q):
@@ -56,11 +55,11 @@ def solve_pi(p: int, q: int) -> tuple[int, int, int, int, int] | None:
     return None
 
 
-def pi_get_latex_ans(p: int, q: int):
+def e_get_latex_ans(p: int, q: int):
     if q == 0:
         return '你莫不是在消遣洒家？'
     try:
-        res = solve_pi(p, q)
+        res = solve_e(p, q)
     except CannotCalculate:
         res = None
 
@@ -69,7 +68,7 @@ def pi_get_latex_ans(p: int, q: int):
 
     n, a_, b_, c_, sgn = res
     i = I(n).subs({a: a_, b: b_, c: c_})
-    return rf'注意到 $${q if q!=1 else ""}\pi-{p} = \int_0^1 {latex(i)} \mathrm{"{d}"} x {">" if sgn==1 else "<"} 0$$ 证毕！'
+    return rf'注意到 $${q if q!=1 else ""}e-{p} = \int_0^1 {latex(i)} \mathrm{"{d}"} x {">" if sgn==1 else "<"} 0$$ 证毕！'
 
 
 # for i in range(1, 6):
