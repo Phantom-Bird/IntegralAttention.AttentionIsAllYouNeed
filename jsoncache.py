@@ -63,3 +63,17 @@ class NamedTupleJsonConverter(JsonConverter):
     def from_json(self, di: dict):
         return self.cls(**{key: self.from_(value)
                            for key, value in di.items()})
+
+class DictJsonConverter(JsonConverter):
+    def __init__(self, cls: type[namedtuple], to=lambda x: x, from_=lambda x: x):
+        self.cls = cls
+        self.to = to
+        self.from_ = from_
+
+    def to_json(self, obj: namedtuple):
+        return {key: self.to(value)
+                for key, value in obj.items()}
+
+    def from_json(self, di: dict):
+        return self.cls(**{key: self.from_(value)
+                           for key, value in di.items()})
