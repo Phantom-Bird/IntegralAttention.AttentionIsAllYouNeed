@@ -28,22 +28,23 @@ class GetIntegrate:
 
     def integrate_and_separate(self, integrate_formula: Expr, integrate_args: tuple) -> dict[str, Expr]:
         """解积分，分离各项"""
-        # 解积分
-        res = integrate(integrate_formula, integrate_args)
-        res = expand(expand(res))
-        print(f'integrate[0,1] {integrate_formula}={res}')
-
-        # 分离各项
-        di = {}
-        exprs = []
-        for key, expr in self.integrate_result_classes.items():
-            if key == CONSTANT_TERM_KEY:
-                continue
-            exprs.append(expr)
-            di[key] = res.coeff(expr)
-
-        constant_term, _ = res.as_independent(*exprs)
-        return {**di, CONSTANT_TERM_KEY: constant_term}
+        raise NotImplementedError('该函数已弃用，请使用 GetIntegrateFromData 类。如果想要使用它预处理，见 pre/old_solution.py')
+        # # 解积分
+        # res = integrate(integrate_formula, integrate_args)
+        # res = expand(expand(res))
+        # print(f'integrate[0,1] {integrate_formula}={res}')
+        #
+        # # 分离各项
+        # di = {}
+        # exprs = []
+        # for key, expr in self.integrate_result_classes.items():
+        #     if key == CONSTANT_TERM_KEY:
+        #         continue
+        #     exprs.append(expr)
+        #     di[key] = res.coeff(expr)
+        #
+        # constant_term, _ = res.as_independent(*exprs)
+        # return {**di, CONSTANT_TERM_KEY: constant_term}
 
     def get_integrate_args(self, try_arg):
         raise NotImplementedError()
@@ -85,7 +86,7 @@ class Solution:
     def get_symbols(self, separate_result):
         """凑积分结果系数"""
         system = [
-            int_term - self.integrate_result_classes_eq[key]
+            Eq(int_term, self.integrate_result_classes_eq[key])
             for key, int_term in separate_result.items()
         ]
         print(f'{system=}')

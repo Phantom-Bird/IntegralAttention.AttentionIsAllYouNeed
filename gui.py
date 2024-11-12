@@ -12,7 +12,7 @@ def get_root(solutions_dict, top_solution_name):
     solution_names = list(solutions_dict.keys())
     solution_names.remove(top_solution_name)
     solution_names.insert(0, top_solution_name)
-    ENTRY_WIDTH = 5
+    ENTRY_WIDTH = 10
 
     # 定义函数来处理用户输入和生成 HTML
     def generate_html():
