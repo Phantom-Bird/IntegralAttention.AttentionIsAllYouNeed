@@ -79,16 +79,6 @@ def main(in_file, out_file, dim, classes_dict_callback):
         fp.write('\n')
 
 
-if __name__ == '__main__':
-    in_file = 'mma2sympy_input.txt'
-    out_file = 'mma2sympy_output.py'
 
-    def get_classes_dict(n, m):
-        return {
-            'pin_term': pi ** n,
-            CONSTANT_TERM_KEY: None
-        }
-
-    main(in_file, out_file, 2, get_classes_dict)
 
 
