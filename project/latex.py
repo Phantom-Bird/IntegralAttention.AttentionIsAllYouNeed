@@ -1,4 +1,4 @@
-MATHJAX = 'mathjax-full/es5/tex-mml-chtml.js'
+from config import MATHJAX
 
 def get_html(latex_code):
     return r'''

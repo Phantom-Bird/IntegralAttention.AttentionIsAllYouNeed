@@ -2,6 +2,7 @@ from solution import *
 from sympy import *
 from sympy.abc import a, b, x
 from sgntools import lin_func_sgn
+import guilib as g
 
 
 class EIntegrate(GetIntegrateFromData):
@@ -26,6 +27,12 @@ class EIntegrate(GetIntegrateFromData):
 
 
 class ESolution(Solution):
+    gui = [
+        '比较 e 与',
+        g.Frac(g.Entry(vid='p'),
+               g.Entry(vid='q'))
+    ]
+
     def __init__(self, p, q):
         self.p = p
         self.q = q

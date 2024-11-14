@@ -2,7 +2,7 @@ from solution import *
 from sympy import *
 from sympy.abc import a, b, c, x
 from sgntools import sq_func_sgn
-from sympy import Rational as R
+import guilib as g
 
 
 class PiIntegrate(GetIntegrateFromData):
@@ -83,6 +83,12 @@ class PiIntegrate(GetIntegrateFromData):
 
 
 class PiSolution(Solution):
+    gui = [
+        '比较 π 与',
+        g.Frac(g.Entry(vid='p'),
+               g.Entry(vid='q'))
+    ]
+
     def __init__(self, p, q):
         self.p = p
         self.q = q

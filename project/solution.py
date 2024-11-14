@@ -1,15 +1,6 @@
 from typing import Iterable, Callable
 from sympy import *
-
-
-solutions = {}
-top_solution_name = None
-
-def register(name, solution, top=False):
-    global top_solution_name
-    solutions[name] = solution
-    if top or top_solution_name is None:
-        top_solution_name = name
+from guilib import Pattern
 
 
 class CannotCalculate(Exception):
@@ -67,10 +58,8 @@ class GetIntegrateFromData(GetIntegrate):
 
 
 class Solution:
-    MAX_CALCULATE = 4
-    MAX_TRY = 4
-
     get_integrate: GetIntegrate
+    gui: Pattern
 
     get_tries_args: Callable[[], Iterable[Expr]]
     symbols: tuple[Symbol, ...]
@@ -79,9 +68,6 @@ class Solution:
 
     check_sgn: Callable
     # check_sgn: Callable[?, 1 | 0 | -1]
-
-    def __init__(self, *args):
-        raise NotImplementedError()
 
     def get_symbols(self, separate_result):
         """凑积分结果系数"""
@@ -102,3 +88,16 @@ class Solution:
 
     def get_latex_ans(self):
         raise NotImplementedError()
+
+
+# 由于所有插件都只能导入这一个文件，所以把注册的也放在这里。
+solutions = {}
+solution_sort = []
+
+def register(name, solution, top=False):
+    solutions[name] = solution
+    if top:
+        solution_sort.insert(0, name)
+    else:
+        solution_sort.append(name)
+

@@ -1,0 +1,5 @@
+SCALING = 2.5
+DEFAULT_ENTRY_WIDTH = 5
+DEFAULT_FRAC_LINE_LENGTH = 40 * SCALING
+MATHJAX = '../mathjax-full/es5/tex-mml-chtml.js'
+
