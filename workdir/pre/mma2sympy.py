@@ -21,7 +21,7 @@ def convert(expression: str):
     ]
     for old, new in li:
         expression = expression.replace(old, new)
-    return expression
+    return expression.lower()
 
 def to_sympy(e):
     return add_multiplication(convert(e))
@@ -63,11 +63,10 @@ def main(in_file, out_file, dim, classes_dict_callback):
 
     print(python_list)
 
-    for item in python_list:
-        expr: Expr
-        key = item[:-1]
-        expr = item[-1]
-        data[tuple(key)] = separate(expr, classes_dict_callback(*key))
+    for key, expr in python_list:
+        if isinstance(key, list):
+            key = tuple(key)
+        data[key] = separate(expr, classes_dict_callback(*key))
 
     from pprint import pprint
     pprint(data)
@@ -75,7 +74,8 @@ def main(in_file, out_file, dim, classes_dict_callback):
     with open(out_file, 'w') as fp:
         fp.write('from sympy import *\n')
         fp.write('from sympy.abc import *\n')
-        fp.write(repr(data))
+        fp.write('_data = \\\n')
+        pprint(data, stream=fp)
         fp.write('\n')
 
 

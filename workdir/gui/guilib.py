@@ -1,6 +1,6 @@
 import sympy
 import ttkbootstrap as ttk
-from config import DEFAULT_ENTRY_WIDTH, DEFAULT_FRAC_LINE_LENGTH
+from config import DEFAULT_ENTRY_WIDTH, DEFAULT_FRAC_LINE_LENGTH, DEFAULT_UP_PX
 
 
 def get_tk(easy_tk_item, parent):
@@ -155,7 +155,7 @@ class Frac(EasyTkItem):
 
 
 class Up(EasyTkItem):
-    def __init__(self, item, up_px=10, **kw):
+    def __init__(self, item, up_px=DEFAULT_UP_PX, **kw):
         super().__init__(**kw)
         self.item = item
         self.up_px = up_px

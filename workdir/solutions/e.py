@@ -3,6 +3,7 @@ from sympy import *
 from sympy.abc import a, b, x
 from sgntools import lin_func_sgn
 from gui import guilib as g
+from output_util import to_latex, sign2cmp
 
 
 class EIntegrate(GetIntegrateFromData):
@@ -61,9 +62,10 @@ class ESolution(Solution):
         if try_arg is None:
             return None
 
-        p, q = self.p, self.q
+        p = to_latex(self.p)
+        q = to_latex(self.q, is_coeff=True)
         I = self.get_integrate.get_latex(try_arg, symbol_val)
-        return rf'{q if q != 1 else ""}e-{p} = {I} {">" if sgn == 1 else "<"} 0'
+        return rf'{q}e-{p} = {I} {sign2cmp[sgn]} 0'
 
 
 register('e', ESolution)

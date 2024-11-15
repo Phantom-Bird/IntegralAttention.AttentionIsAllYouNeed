@@ -8,8 +8,8 @@
 from pre.mma2sympy import *
 
 if __name__ == '__main__':
-    in_file = 'mma2sympy_input.txt'
-    out_file = 'mma2sympy_output.py'
+    in_file = '../mma2sympy_input.txt'
+    out_file = '../mma2sympy_output.py'
 
     def get_classes_dict(n, m):
         return {
