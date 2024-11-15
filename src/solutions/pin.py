@@ -1,10 +1,9 @@
 from sympy import *
 from sympy.abc import a, b, x
 
-import solution
 from solution import *
 from sgntools import lin_func_sgn
-import guilib as g
+from gui import guilib as g
 
 _data = {(1, 2): {'constant_term': a - 2 * b / 3, 'pin_term': -a / 4 + b / 4},
          (1, 4): {'constant_term': -2 * a / 3 + 13 * b / 15, 'pin_term': a / 4 - b / 4},
@@ -116,11 +115,11 @@ class PiNSolution(Solution):
         print(f'{(try_arg, symbol_val, sgn)=}')
 
         if try_arg is None:
-            return '注意力涣散……'
+            return None
 
         p, q = self.p, self.q
         I = self.get_integrate.get_latex(try_arg, symbol_val)
-        return rf'注意到 $${q if q != 1 else ""}\pi^{self.n}-{p} = {I} {">" if sgn == 1 else "<"} 0$$ 证毕！'
+        return rf'{q if q != 1 else ""}\pi^{self.n}-{p} = {I} {">" if sgn == 1 else "<"} 0'
 
 
 register('π^n', PiNSolution)

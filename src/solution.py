@@ -1,6 +1,6 @@
 from typing import Iterable, Callable
-from sympy import *
-from guilib import Pattern
+from sympy import Eq, linsolve, simplify, latex, Expr, Symbol
+from gui.guilib import Pattern
 
 
 class CannotCalculate(Exception):
@@ -38,16 +38,23 @@ class GetIntegrate:
         # return {**di, CONSTANT_TERM_KEY: constant_term}
 
     def get_integrate_args(self, try_arg):
+        """
+        :return: integrand_function, (independent_variable, lower_limit, upper_limit)
+        翻译: 被积函数, (自变量, 下限, 上限)
+        """
         raise NotImplementedError()
 
     def tries(self, try_arg):
+        """
+        :return: {term_name: expression}
+        """
         return self.integrate_and_separate(*self.get_integrate_args(try_arg))
 
     def get_latex(self, try_arg, subs):
         expr, args = self.get_integrate_args(try_arg)
         expr = simplify(expr).subs(subs)
         sym, low, high = args
-        return r'\int_{%s}^{%s} {%s} \mathrm{d} {%s}' % (low, high, latex(expr), sym)
+        return r'\int_{%s}^{%s} {%s} \mathrm{d} {%s}' % (low, high, latex(simplify(expr)), sym)
 
 
 class GetIntegrateFromData(GetIntegrate):
@@ -87,6 +94,9 @@ class Solution:
         return None, None, None
 
     def get_latex_ans(self):
+        """
+        :return: None if it can't be solved; Otherwise, LaTeX (without "$$")
+        """
         raise NotImplementedError()
 
 

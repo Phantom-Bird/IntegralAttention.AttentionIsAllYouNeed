@@ -1,8 +1,7 @@
 from solution import *
-from sympy import *
 from sympy.abc import a, b, c, x
 from sgntools import sq_func_sgn
-import guilib as g
+from gui import guilib as g
 
 
 class PiIntegrate(GetIntegrateFromData):
@@ -116,11 +115,11 @@ class PiSolution(Solution):
         print(f'{(try_arg, symbol_val, sgn)=}')
 
         if try_arg is None:
-            return '注意力涣散……'
+            return None
 
         p, q = self.p, self.q
         I = self.get_integrate.get_latex(try_arg, symbol_val)
-        return rf'注意到 $${q if q != 1 else ""}\pi-{p} = {I} {">" if sgn == 1 else "<"} 0$$ 证毕！'
+        return rf'{q if q != 1 else ""}\pi-{p} = {I} {">" if sgn == 1 else "<"} 0'
 
 
 register('π', PiSolution, top=True)

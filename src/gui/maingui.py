@@ -2,11 +2,12 @@
 import sympy
 import webview
 from tkinter import messagebox
-from latex import get_html
+from gui.latex import get_html
 import ttkbootstrap as ttk
 from solution import BadInput
-from guilib import get_tk, EntryVariable
-from config import SCALING
+from gui.guilib import get_tk, EntryVariable
+from config import SCALING, HTML_DST
+from threading import Thread
 
 USER_THEMES = {
     "supercosmo": {
@@ -47,29 +48,20 @@ def get_root(solutions_dict, solution_sort):
         print('ans:', ans_latex)
 
         # 生成 HTML 文件
-        with open('res.html', 'w', encoding='utf-8') as fp:
+        with open(HTML_DST, 'w', encoding='utf-8') as fp:
             fp.write(get_html(ans_latex))
 
         # 打开 webview 窗口显示生成的 HTML 文件
-        webview.create_window('计算结果', 'res.html', width=800, height=200)
+        webview.create_window('计算结果', HTML_DST, width=800, height=200)
         webview.start()
 
     # 创建主窗口
-    root = ttk.Window(scaling=SCALING)
+    root = ttk.Window(scaling=SCALING, resizable=(False, False))
     root.title("Attention is all you need")
-
-    style = ttk.Style()
-
-    # 设置Notebook的边框为0，即不显示边框
-    # style.configure('TNotebook', borderwidth=0, relief='flat')
-    # style.configure('TNotebook.Tab', padding=[10, 5])
-
-    # 设置字体大小
-    # style = ttkb.Style()
-    # font = ("黑体", 20)
 
     nb_id_dicts = {}
     # {name: {id: Widget | Variable}}
+    # 为每一个 solution 创建一个 tab
     nb = ttk.Notebook(root, style='primary')
     for name in solution_sort:
         tab_frame = ttk.Frame(root)
