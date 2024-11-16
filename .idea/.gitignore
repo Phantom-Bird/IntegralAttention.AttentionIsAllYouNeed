@@ -1,9 +1,0 @@
-# 默认忽略的文件
-/shelf/
-/workspace.xml
-workdir/mathjax-full/
-workdir/pre/mma2sympy_input.txt
-workdir/pre/mma2sympy_output.py
-pre.nb
-.idea/
-workdir/res.html
