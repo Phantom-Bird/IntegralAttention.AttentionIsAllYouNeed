@@ -3,4 +3,5 @@
 /workspace.xml
 workdir/mathjax-full/
 pre.nb
-.idea
+.idea/
+workdir/res.html

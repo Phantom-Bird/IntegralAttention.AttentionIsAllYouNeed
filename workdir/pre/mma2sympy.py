@@ -1,25 +1,23 @@
 from sympy import *
 from sympy.abc import *
 from solution import CONSTANT_TERM_KEY
+import re
 
+
+supports_mul = r'[a-zA-z0-9()]'
 
 def add_multiplication(expression):
-    import re
     # 使用正则表达式在符合要求的空格位置添加乘号
-    expression = re.sub(r'(\d)\s+([a-zA-Z(])', r'\1 * \2', expression)  # 数字-字母或数字-括号
-    expression = re.sub(r'([a-zA-Z)])\s+([a-zA-Z(])', r'\1 * \2', expression)  # 字母-字母或括号-字母
+    expression = re.sub(rf'({supports_mul})\s+({supports_mul})', r'\1 * \2', expression)
     return expression
 
 def convert(expression: str):
-    li = [
+    replace = [
         (r'\[Pi]', 'pi'),
-        ('[', '('),
-        (']', ')'),
-        ('{', '['),
-        ('}', ']'),
+        *zip('[]{}', '()[]'),
         ('^', '**')
     ]
-    for old, new in li:
+    for old, new in replace:
         expression = expression.replace(old, new)
     return expression.lower()
 
@@ -82,3 +80,14 @@ def main(in_file, out_file, dim, classes_dict_callback):
 
 
 
+if __name__ == '__main__':
+    in_file = 'mma2sympy_input.txt'
+    out_file = 'mma2sympy_output.py'
+
+    def get_classes_dict(n):
+        return {
+            'e_term': e,
+            CONSTANT_TERM_KEY: None
+        }
+
+    main(in_file, out_file, 1, get_classes_dict)

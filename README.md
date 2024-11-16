@@ -19,9 +19,8 @@ $$\int_0^1 x^n (1-x)^n (a+bx) e^{qx} \mathrm{d} x=f(a, b, q)e^q+g(a, b, q)$$
 
 ### 预处理
 
-预处理是指对于所有的 $n$，预处理出 $f$ 以及 $g$ 的过程。
-（由于 sympy 的局限性，有一些积分式不能完全化简）  
-我们使用 Mathematica 做计算：
+预处理是指对于所有的 $n$，预处理出 $f$ 以及 $g$ 的过程。  
+我们使用 Mathematica 做计算（由于 sympy 的局限性，有一些积分式不能完全化简）  
 
 ```mathematica
 (* 定义积分式 *)
@@ -95,6 +94,10 @@ _data = \
 因为我们的 `try_arg` 与 `data` 的键不一致，所以我们要通过重载 `tries` 进行转换。
 
 ```py
+from solution import *
+
+...
+
 class EQIntegrate(GetIntegrateFromData):
     data = _data
 
@@ -108,9 +111,12 @@ class EQIntegrate(GetIntegrateFromData):
                 for key, expr in self.data[(n,)].items()}
 ```
 
-#### `Solution` 类（除GUI外）
+#### `Solution` 类
 
 ```py
+from sgntools import lin_func_sgn
+
+
 class EQSolution(Solution):
     def __init__(self, q1, q2, u, v):
         if q2 == 0 or v == 0:
@@ -164,7 +170,7 @@ class EQSolution(Solution):
 
 输入 `print(EQSolution(Rational(2), 1, 7, 1).get_latex_ans())`，可得
 $$e^{2}-{7} = \int_{0}^{1} {4 e^{2 x} x^{2} \left(x - 1\right)^{2}} \mathrm{d} {x} > 0$$
-我们可以将 `\int_{0}^{1} {4 e^{2 x} x^{2} \left(x - 1\right)^{2}}` 输入 [Wolfram Alpha](wolframalpha.com) 验算答案
+我们可以将 `\int_{0}^{1} {4 e^{2 x} x^{2} \left(x - 1\right)^{2}}` 输入 [Wolfram Alpha](https://wolframalpha.com) 验算答案
 
 #### GUI 与 注册
 

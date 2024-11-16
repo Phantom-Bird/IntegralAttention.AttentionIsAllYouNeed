@@ -6,22 +6,19 @@ from gui import guilib as g
 from output_util import to_latex, sign2cmp
 
 
+_data = \
+    {1: {'constant_term': 3 * a - 8 * b, 'e_term': -a + 3 * b},
+     2: {'constant_term': -38 * a + 174 * b, 'e_term': 14 * a - 64 * b},
+     3: {'constant_term': 1158 * a - 7584 * b, 'e_term': -426 * a + 2790 * b},
+     4: {'constant_term': -65304 * a + 557400 * b, 'e_term': 24024 * a - 205056 * b},
+     5: {'constant_term': 5900520 * a - 62118720 * b,
+         'e_term': -2170680 * a + 22852200 * b},
+     6: {'constant_term': -780827760 * a + 9778048560 * b,
+         'e_term': 287250480 * a - 3597143040 * b}}
+
 class EIntegrate(GetIntegrateFromData):
     # sympy 算力不够，以下由 MMA 算出
-    data = {
-        1: {
-            'e_term': -a + 3*b,
-            CONSTANT_TERM_KEY: 3*a - 8*b,
-        },
-        2: {
-            'e_term': 2 * (7*a - 32*b),
-            CONSTANT_TERM_KEY: 2 * (-19*a + 87*b),
-        },
-        3: {
-            'e_term': 6 * (71*a + 465*b),
-            CONSTANT_TERM_KEY: 6 * (193*a - 1264*b),
-        },
-    }
+    data = _data
 
     def get_integrate_args(self, n):
         return x ** n * (1 - x) ** n * (a + b * x) * exp(x), (x, 0, 1)
@@ -53,7 +50,7 @@ class ESolution(Solution):
 
     @staticmethod
     def get_tries_args():
-        return range(1, 4)
+        return EIntegrate.data.keys()
 
     def get_latex_ans(self):
         try_arg, symbol_val, sgn = self.try_times()
