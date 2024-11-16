@@ -75,19 +75,3 @@ def main(in_file, out_file, dim, classes_dict_callback):
         fp.write('_data = \\\n')
         pprint(data, stream=fp)
         fp.write('\n')
-
-
-
-
-
-if __name__ == '__main__':
-    in_file = 'mma2sympy_input.txt'
-    out_file = 'mma2sympy_output.py'
-
-    def get_classes_dict(n):
-        return {
-            'e_term': e,
-            CONSTANT_TERM_KEY: None
-        }
-
-    main(in_file, out_file, 1, get_classes_dict)
