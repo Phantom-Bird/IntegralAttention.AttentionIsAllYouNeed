@@ -126,7 +126,7 @@ class Solution:
         raise NotImplementedError()
 
 
-# 由于所有插件都只能导入这一个文件，所以把注册的也放在这里。
+# 历史遗留问题
 solutions = {}
 solution_sort = []
 
