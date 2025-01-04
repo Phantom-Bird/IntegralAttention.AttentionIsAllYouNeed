@@ -4,6 +4,8 @@
 
 ## 下载使用
 
+> 请将 `config.py` 中的 `MATHJAX` 选项换成可以访问的 MathJax JavaScript 路径！（如果在本地，请使用相对路径）
+
 ```shell
 python -m pip install -r requirements.txt
 python workdir/main.py

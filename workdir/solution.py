@@ -126,7 +126,7 @@ class Solution:
         raise NotImplementedError()
 
 
-# 插件注册
+# 插件注册（历史遗留问题）
 solutions = {}
 solution_sort = []
 
