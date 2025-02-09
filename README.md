@@ -6,13 +6,13 @@
 
 ## 下载使用
 
-> $\LaTeX$ 的渲染可能会奇慢无比，此时你可以将 `config.py` 中的 `MATHJAX` 改为更快的 CDN 的地址。
-> 当然，渲染最快的方法是把 MathJax 下载到 `workdir` 目录下，然后把 JS 文件的相对路径填到 `MATHJAX` 常量里。
-
 ```shell
 python -m pip install -r requirements.txt
 python workdir/main.py
 ```
+
+> $\LaTeX$ 的渲染可能会奇慢无比，此时你可以将 `config.py` 中的 `MATHJAX` 改为更快的 CDN 的地址。
+> 当然，渲染最快的方法是把 MathJax 下载到 `workdir` 目录下，然后把 JS 文件的相对路径填到 `MATHJAX` 常量里。
 
 ## 插件编写
 
