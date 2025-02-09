@@ -1,10 +1,13 @@
 # Attention is all you need
 
+> 注意：本项目和 AI 中的注意力机制没有一毛钱关系。
+
 灵感及理论来源：[量化调酒师](https://www.zhihu.com/people/plel)
 
 ## 下载使用
 
-> 请将 `config.py` 中的 `MATHJAX` 选项换成可以访问的 MathJax JavaScript 路径！（如果在本地，请使用相对路径）
+> $\LaTeX$ 的渲染可能会奇慢无比，此时你可以将 `config.py` 中的 `MATHJAX` 改为更快的 CDN 的地址。
+> 当然，渲染最快的方法是把 MathJax 下载到 `workdir` 目录下，然后把 JS 文件的相对路径填到 `MATHJAX` 常量里。
 
 ```shell
 python -m pip install -r requirements.txt

@@ -3,7 +3,8 @@ DEFAULT_ENTRY_WIDTH = 5
 DEFAULT_FRAC_LINE_LENGTH = 40 * SCALING
 DEFAULT_UP_PX = 8 * SCALING
 
-MATHJAX = 'mathjax-full/es5/tex-mml-chtml.js'
+MATHJAX = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js'
+# MATHJAX = 'mathjax-full/es5/tex-mml-chtml.js'
 HTML_DST = 'res.html'
 
 BEFORE = '注意到'

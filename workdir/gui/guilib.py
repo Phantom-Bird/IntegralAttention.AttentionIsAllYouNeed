@@ -33,8 +33,8 @@ class EasyTkItem:
         self.id = id
         self.kwargs = kwargs
 
-    def get_tk(self, parent: ttk.Frame | ttk.Window) -> tuple[ttk.TK_WIDGETS + ttk.TTK_WIDGETS,
-    dict[str, object]]:
+    def get_tk(self, parent: ttk.Frame | ttk.Window) \
+            -> tuple[ttk.TK_WIDGETS + ttk.TTK_WIDGETS, dict[str, object]]:
         """
         Get an instance
         :param parent: outer frame
@@ -46,8 +46,8 @@ class EasyTkItem:
             id_dict[self.id] = widget
         return widget, id_dict
 
-    def _get_tk(self, parent: ttk.Frame | ttk.Window) -> tuple[ttk.TK_WIDGETS + ttk.TTK_WIDGETS,
-    dict[str, object]]:
+    def _get_tk(self, parent: ttk.Frame | ttk.Window) \
+            -> tuple[ttk.TK_WIDGETS + ttk.TTK_WIDGETS, dict[str, object]]:
         """
         Get an instance
         :param parent: outer frame
