@@ -6,8 +6,7 @@ from gui.latex import get_html
 import ttkbootstrap as ttk
 from solution import BadInput
 from gui.guilib import get_tk, EntryVariable
-from config import SCALING, HTML_DST
-from threading import Thread
+from config import SCALING
 
 USER_THEMES = {
     "supercosmo": {
@@ -47,12 +46,8 @@ def get_root(solutions_dict, solution_sort):
 
         print('ans:', ans_latex)
 
-        # 生成 HTML 文件
-        with open(HTML_DST, 'w', encoding='utf-8') as fp:
-            fp.write(get_html(ans_latex))
-
         # 打开 webview 窗口显示生成的 HTML 文件
-        webview.create_window('计算结果', HTML_DST, width=800, height=200)
+        webview.create_window('计算结果', html=get_html(ans_latex), width=800, height=200)
         webview.start()
 
     # 创建主窗口
