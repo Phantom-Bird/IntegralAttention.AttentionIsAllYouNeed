@@ -4,6 +4,7 @@ DEFAULT_FRAC_LINE_LENGTH = 40 * SCALING
 DEFAULT_UP_PX = 8 * SCALING
 
 MATHJAX = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js'
+# 可以把 MathJax 下载到本地，然后使用相对路径
 # MATHJAX = 'mathjax-full/es5/tex-mml-chtml.js'
 
 BEFORE = '注意到'
