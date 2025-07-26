@@ -49,7 +49,7 @@ class ESolution(Solution):
         self.check_sgn = lin_func_sgn
 
     @staticmethod
-    def get_tries_args():
+    def gen_trial_args():
         return EIntegrate.data.keys()
 
     def get_latex_ans(self):

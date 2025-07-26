@@ -144,7 +144,7 @@ class EQSolution(Solution):
         # 输出：0（无法确定），1或-1（可以确定，1和-1哪个代表大于、哪个代表小于，是可以互换的）
         # sgntools 模块提供了 lin_func_sgn 和 sq_func_sgn 函数，详见 help
 
-    def get_tries_args(self):
+    def gen_trial_args(self):
         """
         生成每一次尝试的 try_arg
         """

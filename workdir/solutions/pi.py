@@ -109,7 +109,7 @@ class PiSolution(Solution):
         self.check_sgn = sq_func_sgn
 
     @staticmethod
-    def get_tries_args():
+    def gen_trial_args():
         return PiIntegrate.data.keys()
 
     def get_latex_ans(self):

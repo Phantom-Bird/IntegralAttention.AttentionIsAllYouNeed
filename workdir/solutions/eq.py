@@ -32,7 +32,7 @@ class EQIntegrate(GetIntegrateFromData):
         n, q = try_arg
         return x**n * (1-x)**n * (a+b*x) * e**(q*x), (x, 0, 1)
 
-    def tries(self, try_arg):
+    def try_one(self, try_arg):
         n, q_value = try_arg
         return {key: expr.subs(q, q_value)
                 for key, expr in self.data[(n,)].items()}
@@ -66,7 +66,7 @@ class EQSolution(Solution):
         # check
         self.check_sgn = lin_func_sgn
 
-    def get_tries_args(self):
+    def gen_trial_args(self):
         for (n, ) in EQIntegrate.data.keys():
             yield n, self.q
 

@@ -46,7 +46,7 @@ class GetIntegrate:
         """
         raise NotImplementedError()
 
-    def tries(self, try_arg):
+    def try_one(self, try_arg):
         """
         :return: {term_name: coefficient_of_the_term}
                 {该项的名称: 该项系数}
@@ -63,7 +63,7 @@ class GetIntegrate:
 class GetIntegrateFromData(GetIntegrate):
     data: dict[object, dict[str, Expr]]
 
-    def tries(self, try_arg):
+    def try_one(self, try_arg):
         return self.data[try_arg]
 
 
@@ -71,7 +71,7 @@ class Solution:
     get_integrate: GetIntegrate
     gui: Pattern
 
-    get_tries_args: Callable[[], Iterable[Expr]]
+    gen_trial_args: Callable[[], Iterable[Expr]]
     """
     Generate try_arg for each trial
     生成每一次尝试的 try_arg
@@ -112,8 +112,13 @@ class Solution:
         return linsolve(system, *self.symbols)
 
     def try_times(self) -> tuple[Expr, dict, int] | tuple[None, None, None]:
-        for try_arg in self.get_tries_args():
-            separate = self.get_integrate.tries(try_arg)
+        try:
+            try_args = self.gen_trial_args()
+        except AttributeError:
+            try_args = self.get_tries_args()  # 查询精神状态
+
+        for try_arg in try_args:
+            separate = self.get_integrate.try_one(try_arg)
             for symbol_solution in self.get_symbols(separate):
                 if sgn := self.check_sgn(*symbol_solution):
                     return try_arg, dict(zip(self.symbols, symbol_solution)), sgn

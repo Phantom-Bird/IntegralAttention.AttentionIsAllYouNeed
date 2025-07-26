@@ -106,7 +106,7 @@ class PiNSolution(Solution):
         # check
         self.check_sgn = lin_func_sgn
 
-    def get_tries_args(self):
+    def gen_trial_args(self):
         for n, m in PiNIntegrate.data.keys():
             if n == self.n:
                 yield n, m
